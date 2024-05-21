@@ -1,21 +1,39 @@
 ---
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: storage
+  name: perf-enhancements
   namespace: openshift-gitops
 spec:
-  destination:
-    namespace: openshift-gitops
-    server: 'https://kubernetes.default.svc'
-  project: default
-  source:
-    repoURL: https://github.com/eformat/sno-hcp-rhoai.git
-    path: gitops/applications/storage
-    targetRevision: main
+  goTemplate: true
+  generators:
+    - clusterDecisionResource:
+        configMapRef: acm-placement
+        labelSelector:
+          matchLabels:
+            cluster.open-cluster-management.io/placement: placement-hub-openshift
+        requeueAfterSeconds: 180
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - Validate=true
+    preserveResourcesOnDeletion: false
+  template:
+    metadata:
+      name: perf-enhancements-{{.name}}
+      annotations:
+        argocd.argoproj.io/compare-options: IgnoreExtraneous
+    spec:
+      project: default
+      destination:
+        server: "{{.server}}"
+        namespace: openshift-gitops
+      source:
+        repoURL: https://github.com/eformat/sno-hcp-rhoai.git
+        path: gitops/applications/perf-enhancements
+        plugin:
+          name: argocd-vault-plugin-kustomize
+        targetRevision: main
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+      syncOptions:
+        - Validate=true

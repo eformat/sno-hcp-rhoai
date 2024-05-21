@@ -1,0 +1,4 @@
+---
+resources:
+  - provisioning.yaml
+  - assisted-service-config.yaml
