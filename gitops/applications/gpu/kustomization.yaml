@@ -1,0 +1,8 @@
+---
+resources:
+  - namespaces.yaml
+  - operator-groups.yaml
+  - subscriptions.yaml
+  - nfd-cr.yaml
+  - configmap.yaml
+  - gpu-cluster-policy.yaml
