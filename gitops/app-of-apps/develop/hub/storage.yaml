@@ -28,8 +28,6 @@ spec:
       source:
         repoURL: https://github.com/eformat/sno-hcp-rhoai.git
         path: gitops/applications/storage
-        plugin:
-          name: argocd-vault-plugin-kustomize
         targetRevision: main
       syncPolicy:
         automated:
