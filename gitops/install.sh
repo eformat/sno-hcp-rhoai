@@ -9,8 +9,25 @@ readonly RUN_DIR=$(pwd)
 DRYRUN=${DRYRUN:-}
 BASE_DOMAIN=${BASE_DOMAIN:-}
 CLUSTER_NAME=${CLUSTER_NAME:-}
-GITOPS_OPERATOR_VERSION=1.12.2
 EXTRA_DISK_SIZE=${EXTRA_DISK_SIZE:-200}
+GITOPS_OPERATOR_VERSION=1.12.2
+ACM_OPERATOR_VERSION=2.10.3
+
+wait_for_acm_csv() {
+    local i=0
+    STATUS=$(oc get csv advanced-cluster-management.v${ACM_OPERATOR_VERSION} -n open-cluster-management -o jsonpath='{.status.phase}')
+    until [ "$STATUS" == "Succeeded" ]
+    do
+        echo -e "${GREEN}Waiting for advanced-cluster-management csv to install.${NC}"
+        sleep 5
+        ((i=i+1))
+        if [ $i -gt 200 ]; then
+            echo -e "🚨${RED}Failed waiting for advanced-cluster-management csv never Succeeded?.${NC}"
+            exit 1
+        fi
+        STATUS=$(oc get csv advanced-cluster-management.v${ACM_OPERATOR_VERSION} -n open-cluster-management -o jsonpath='{.status.phase}')
+    done
+}
 
 wait_for_gitops_csv() {
     local i=0
@@ -55,6 +72,7 @@ boostrap() {
 
     oc apply -k gitops/bootstrap
     wait_for_gitops_csv
+    wait_for_acm_csv
     oc apply -k gitops/bootstrap
 
     if [ "$?" != 0 ]; then
@@ -169,6 +187,7 @@ wait_for_machine_config() {
             echo -e "🕱${RED}Failed - MachineConfig 99-kubens-master never found?.${NC}"
             exit 1
         fi
+        oc get mc 99-kubens-master 2>&1>/dev/null
     done
 }
 
@@ -180,7 +199,7 @@ app_of_apps() {
 
     echo "🌴 Running app_of_apps..."
 
-    oc apply -f gitops/app-of-apps/develop-app-of-apps.yaml
+    oc apply -f gitops/app-of-apps/develop-hub-app-of-apps.yaml
 
     wait_for_machine_config
 

@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: perf-enhancements
+  name: storage
   namespace: openshift-gitops
 spec:
   goTemplate: true
@@ -17,7 +17,7 @@ spec:
     preserveResourcesOnDeletion: false
   template:
     metadata:
-      name: perf-enhancements-{{.name}}
+      name: storage-{{.name}}
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
     spec:
@@ -27,7 +27,7 @@ spec:
         namespace: openshift-gitops
       source:
         repoURL: https://github.com/eformat/sno-hcp-rhoai.git
-        path: gitops/applications/perf-enhancements
+        path: gitops/applications/storage
         plugin:
           name: argocd-vault-plugin-kustomize
         targetRevision: main
