@@ -235,7 +235,28 @@ gpu_config() {
         nvidia.com/device-plugin.config=nvidia-l4 \
         --overwrite
 
-    echo "🌴 gpu_config ran OK"
+    if [ "$?" != 0 ]; then
+      echo -e "🚨${RED}Failed - to run gpu_config ?${NC}"
+      exit 1
+    else
+      echo "🌴 gpu_config ran OK"
+    fi
+}
+
+label_managed_cluster() {
+    if [ -z "$DRYRUN" ]; then
+        echo -e "${GREEN}Ignoring - label_managed_cluster - dry run set${NC}"
+        return
+    fi
+
+    oc -n local-cluster label managedcluster local-cluster cluster.open-cluster-management.io/clusterset=develop --overwrite
+
+    if [ "$?" != 0 ]; then
+      echo -e "🚨${RED}Failed - to run label_managed_cluster ?${NC}"
+      exit 1
+    else
+      echo "🌴 label_managed_cluster ran OK"
+    fi
 }
 
 usage() {
@@ -275,6 +296,7 @@ all() {
     setup_extra_storage
     app_of_apps
     storage_class
+    label_managed_cluster
     #gpu_config
 }
 
