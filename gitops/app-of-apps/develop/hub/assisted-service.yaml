@@ -28,6 +28,8 @@ spec:
       source:
         repoURL: https://github.com/eformat/sno-hcp-rhoai.git
         path: gitops/applications/assisted-service
+        plugin:
+          name: argocd-novault-plugin-kustomize
         targetRevision: main
       syncPolicy:
         automated:

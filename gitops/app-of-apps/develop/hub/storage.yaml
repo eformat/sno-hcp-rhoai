@@ -29,6 +29,8 @@ spec:
         repoURL: https://github.com/eformat/sno-hcp-rhoai.git
         path: gitops/applications/storage
         targetRevision: main
+        plugin:
+          name: argocd-novault-plugin-kustomize
       syncPolicy:
         automated:
           prune: true

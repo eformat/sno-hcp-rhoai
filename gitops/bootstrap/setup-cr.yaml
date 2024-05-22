@@ -161,6 +161,15 @@ data:
       generate:
         command: ["sh", "-c"]
         args: ["argocd-vault-plugin -s openshift-gitops:team-avp-credentials generate ./"]
+  kustomize-novault-plugin.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: argocd-novault-plugin-kustomize
+    spec:
+      generate:
+        command: ["sh", "-c"]
+        args: ["kustomize --enable-alpha-plugins --enable-helm build ."]
 ---
 apiVersion: argoproj.io/v1beta1
 kind: ArgoCD
@@ -317,6 +326,38 @@ spec:
             value: "true"
         image: 'quay.io/eformat/argocd-vault-sidecar:2.10.9'
         imagePullPolicy: Always
+        name: vault-plugin-kustomize-novault
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/config
+            name: vault-plugin-kustomize
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          - mountPath: /tmp
+            name: cmp-tmp-kustomize
+          - mountPath: >-
+              /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
+            name: policy-generator
+      - command:
+          - /var/run/argocd/argocd-cmp-server
+        env:
+          - name: KUSTOMIZE_PLUGIN_HOME
+            value: /etc/kustomize/plugin
+          - name: POLICY_GEN_ENABLE_HELM
+            value: "true"
+        image: 'quay.io/eformat/argocd-vault-sidecar:2.10.9'
+        imagePullPolicy: Always
         name: vault-plugin-kustomize
         resources: {}
         securityContext:
@@ -362,6 +403,13 @@ spec:
               path: plugin.yaml
           name: argocd-vault-plugins
         name: vault-plugin-kustomize
+      - configMap:
+          items:
+            - key: kustomize-novault-plugin.yaml
+              mode: 509
+              path: plugin.yaml
+          name: argocd-vault-plugins
+        name: vault-plugin-kustomize-novault
       - emptyDir: {}
         name: cmp-tmp-vault
       - emptyDir: {}
