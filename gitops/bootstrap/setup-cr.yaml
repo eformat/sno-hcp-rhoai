@@ -199,7 +199,7 @@ spec:
     route:
       enabled: false
   initialSSHKnownHosts: {}
-  kustomizeBuildOptions: --enable-alpha-plugins --enable-helm
+  kustomizeBuildOptions: --enable-alpha-plugins
   sso:
     dex:
       openShiftOAuth: true
