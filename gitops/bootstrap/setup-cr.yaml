@@ -341,7 +341,7 @@ spec:
           - mountPath: /var/run/argocd
             name: var-files
           - mountPath: /home/argocd/cmp-server/config
-            name: vault-plugin-kustomize
+            name: vault-plugin-kustomize-novault
           - mountPath: /home/argocd/cmp-server/plugins
             name: plugins
           - mountPath: /tmp
