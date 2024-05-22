@@ -6,3 +6,20 @@ resources:
   - lvm-cluster.yaml
   - storage-cluster.yaml
   - storage-system.yaml
+
+patches:
+  - target:
+      kind: LVMCluster
+      name: sno-lvm
+    patch: |-
+      apiVersion: lvm.topolvm.io/v1alpha1
+      kind: LVMCluster
+      metadata:
+        name: sno-lvm
+      spec:
+        storage:
+          deviceClasses:
+            - name: vgsno
+              deviceSelector:
+                paths:
+                  - /dev/disk/by-path/pci-0000:00:1f.0-nvme-1
