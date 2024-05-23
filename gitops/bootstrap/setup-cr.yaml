@@ -170,6 +170,18 @@ data:
       generate:
         command: ["sh", "-c"]
         args: ["kustomize --enable-alpha-plugins --enable-helm build ."]
+  helm-novault-plugin.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: argocd-novault-plugin-helm
+    spec:
+      init:
+        command: [sh, -c]
+        args: ["helm dependency build"]
+      generate:
+        command: ["bash", "-c"]
+        args: ['helm template "$ARGOCD_APP_NAME" -n "$ARGOCD_APP_NAMESPACE" -f <(echo "$ARGOCD_ENV_HELM_VALUES") .']
 ---
 apiVersion: argoproj.io/v1beta1
 kind: ArgoCD
@@ -381,6 +393,30 @@ spec:
           - mountPath: >-
               /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
             name: policy-generator
+      - command:
+          - /var/run/argocd/argocd-cmp-server
+        image: 'quay.io/eformat/argocd-vault-sidecar:2.10.9'
+        imagePullPolicy: Always
+        name: vault-plugin-helm-novault
+        resources: {}
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - ALL
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+        volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/config
+            name: vault-plugin-helm-novault
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          - mountPath: /tmp
+            name: cmp-tmp-helm
     volumes:
       - configMap:
           items:
@@ -410,6 +446,13 @@ spec:
               path: plugin.yaml
           name: argocd-vault-plugins
         name: vault-plugin-kustomize-novault
+      - configMap:
+          items:
+            - key: helm-novault-plugin.yaml
+              mode: 509
+              path: plugin.yaml
+          name: argocd-vault-plugins
+        name: vault-plugin-helm-novault
       - emptyDir: {}
         name: cmp-tmp-vault
       - emptyDir: {}
