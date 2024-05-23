@@ -26,4 +26,6 @@ policyDefaults:
 policies:
   - name: storage
     manifests:
-      - path: input/
+      - path: input/overlay/hub
+    placement:
+      placementName: placement-hub-openshift
