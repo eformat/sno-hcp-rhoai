@@ -118,7 +118,7 @@ metadata:
   namespace: openshift-gitops
 stringData:
   AVP_AUTH_TYPE: "k8s"
-  AVP_K8S_MOUNT_PATH: "auth/apps.sno.sandbox1604.opentlc.com-openshift-gitops"
+  AVP_K8S_MOUNT_PATH: "auth/apps.hub.sandbox1604.opentlc.com-openshift-gitops"
   AVP_K8S_ROLE: "vault"
   AVP_TYPE: "vault"
   VAULT_ADDR: "https://vault.hashicorp.svc:8200"
