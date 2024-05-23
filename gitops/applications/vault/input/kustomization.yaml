@@ -8,5 +8,9 @@ helmCharts:
     releaseName: vault
     repo:  # we expand chart in folder
     valuesInline:
-      vault.server.route.host: vault.apps.hub.sandbox2969.opentlc.com
-      vault.server.extraEnvironmentVars.VAULT_TLS_SERVER_NAME: vault.apps.hub.sandbox2969.opentlc.com
+      vault:
+        server:
+          route:
+            host: vault.apps.hub.sandbox2969.opentlc.com
+          extraEnvironmentVars:
+            VAULT_TLS_SERVER_NAME: vault.apps.hub.sandbox2969.opentlc.com
