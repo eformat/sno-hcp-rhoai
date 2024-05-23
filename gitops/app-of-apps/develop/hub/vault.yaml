@@ -29,12 +29,7 @@ spec:
         repoURL: https://github.com/eformat/sno-hcp-rhoai.git
         path: gitops/applications/vault
         plugin:
-          name: argocd-novault-plugin-helm
-          env:
-            - name: HELM_VALUES
-              value: |
-                vault.server.route.host=vault.apps.hub.sandbox2969.opentlc.com
-                vault.server.extraEnvironmentVars.VAULT_TLS_SERVER_NAME=vault.apps.hub.sandbox2969.opentlc.com
+          name: argocd-novault-plugin-kustomize
         targetRevision: main
       syncPolicy:
         automated:
