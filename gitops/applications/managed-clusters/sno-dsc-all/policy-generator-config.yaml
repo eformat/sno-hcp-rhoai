@@ -16,7 +16,7 @@ policyDefaults:
   consolidateManifests: false
   copyPolicyMetadata: false
   disabled: false
-  namespace: open-cluster-management-global-set
+  namespace: openshift-gitops
   pruneObjectBehavior: "None"
   remediationAction: enforce
   severity: medium
