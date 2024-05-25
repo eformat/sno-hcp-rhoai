@@ -6,6 +6,5 @@ resources:
   - 05-root-ca-bundle-configmap.yaml
   - 20-klusterletaddonconfig.yaml
   - 20-managedcluster.yaml
-  - 20-managedcluster-info.yaml
   - 30-hostedcluster.yaml
   - 35-nodepools.yaml

@@ -1,9 +1,0 @@
----
-apiVersion: internal.open-cluster-management.io/v1beta1
-kind: ManagedClusterInfo
-metadata:
-  name: sno-dsc-all
-  namespace: sno-dsc-all
-  annotations:
-    argocd.argoproj.io/sync-wave: "20"
-spec: {}
