@@ -4,13 +4,15 @@ kind: HostedCluster
 metadata:
   name: sno-dsc-all
   namespace: clusters
+  labels:
+    hypershift.openshift.io/auto-created-for-infra: sno-dsc-all
   annotations:
     argocd.argoproj.io/sync-wave: "30"
     cluster.open-cluster-management.io/clusterset: 'develop'
 spec:
   autoscaling: {}
   configuration: {}
-  controllerAvailabilityPolicy: HighlyAvailable
+  controllerAvailabilityPolicy: SingleReplica
   dns:
     baseDomain: sandbox2969.opentlc.com
   etcd:

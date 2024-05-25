@@ -3,7 +3,7 @@ resources:
   - 00-namespace.yml
   - 00-etcd-decryption-key.yml
   - 00-pull-secret.yml
-  - 00-ssh-pubkey-secret.yml
+  - 00-ssh-key-secret.yml
   - 05-root-ca-bundle-configmap.yml
   - 20-klusterletaddonconfig.yml
   - 20-managedcluster.yml

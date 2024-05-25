@@ -6,8 +6,10 @@ kind: Secret
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
+    hypershift.openshift.io/cluster: clusters/sno-dsc-all
   creationTimestamp: null
   labels:
+    hypershift.openshift.io/auto-created-for-infra: sno-dsc-all
     hypershift.openshift.io/safe-to-delete-with-cluster: "true"
   name: sno-dsc-all-etcd-encryption-key
   namespace: clusters

@@ -6,6 +6,8 @@ metadata:
   namespace: clusters
   annotations:
     argocd.argoproj.io/sync-wave: "35"
+  labels:
+    hypershift.openshift.io/auto-created-for-infra: sno-dsc-all
 spec:
   arch: amd64
   clusterName: sno-dsc-all
