@@ -3,7 +3,7 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: user-ca-bundle
-  namespace: clusters
+  namespace: sno-dsc-all
   annotations:
     argocd.argoproj.io/sync-wave: "5"
   labels:

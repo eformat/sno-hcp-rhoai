@@ -3,7 +3,7 @@ apiVersion: hypershift.openshift.io/v1beta1
 kind: HostedCluster
 metadata:
   name: sno-dsc-all
-  namespace: clusters
+  namespace: sno-dsc-all
   labels:
     hypershift.openshift.io/auto-created-for-infra: sno-dsc-all
   annotations:

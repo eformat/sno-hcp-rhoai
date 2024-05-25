@@ -12,5 +12,5 @@ metadata:
     hypershift.openshift.io/auto-created-for-infra: sno-dsc-all
     hypershift.openshift.io/safe-to-delete-with-cluster: "true"
   name: sno-dsc-all-etcd-encryption-key
-  namespace: clusters
+  namespace: sno-dsc-all
 type: Opaque
