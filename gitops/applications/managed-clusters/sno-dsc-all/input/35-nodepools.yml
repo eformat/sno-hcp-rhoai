@@ -3,7 +3,7 @@ apiVersion: hypershift.openshift.io/v1beta1
 kind: NodePool
 metadata:
   name: sno-dsc-all-us-east-2b
-  namespace: sno-dsc-all
+  namespace: clusters
   annotations:
     argocd.argoproj.io/sync-wave: "35"
   labels:
