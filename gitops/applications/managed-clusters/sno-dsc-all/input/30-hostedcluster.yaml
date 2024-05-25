@@ -26,6 +26,7 @@ spec:
   fips: false
   infraID: sno-dsc-all
   infrastructureAvailabilityPolicy: SingleReplica
+  issuerURL: https://hcp-clusters.s3.us-east-2.amazonaws.com/sno-dsc-all
   networking:
     clusterNetwork:
     - cidr: 10.132.0.0/14
