@@ -1,0 +1,11 @@
+---
+resources:
+  - 00-etcd-decryption-key.yaml
+  - 00-pull-secret.yaml
+  - 00-ssh-key-secret.yaml
+  - 05-root-ca-bundle-configmap.yaml
+  - 20-klusterletaddonconfig.yaml
+  - 20-managedcluster.yaml
+  - 20-managedcluster-info.yaml
+  - 30-hostedcluster.yaml
+  - 35-nodepools.yaml
