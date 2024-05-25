@@ -1,0 +1,23 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: managed-clusters
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: open-cluster-management-global-set
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: gitops/applications/managed-clusters/applications
+    directory:
+      include: "*.yaml"
+    repoURL: https://github.com/eformat/sno-hcp-rhoai.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+      - Validate=true

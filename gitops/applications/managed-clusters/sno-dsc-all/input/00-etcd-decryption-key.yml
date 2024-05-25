@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+data:
+  key: <ETCD_DECRYPTION_KEY>
+kind: Secret
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  creationTimestamp: null
+  labels:
+    hypershift.openshift.io/safe-to-delete-with-cluster: "true"
+  name: sno-dsc-all-etcd-encryption-key
+  namespace: clusters
+type: Opaque

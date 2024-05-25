@@ -1,0 +1,26 @@
+---
+apiVersion: hypershift.openshift.io/v1beta1
+kind: NodePool
+metadata:
+  name: sno-dsc-all-us-east-2b
+  namespace: clusters
+  annotations:
+    argocd.argoproj.io/sync-wave: "35"
+spec:
+  arch: amd64
+  clusterName: sno-dsc-all
+  management:
+    autoRepair: false
+    upgradeType: Replace
+  nodeDrainTimeout: 0s
+  platform:
+    aws:
+      instanceProfile: sno-dsc-all-worker
+      instanceType: g6.4xlarge
+      rootVolume:
+        size: 200
+        type: gp3
+    type: AWS
+  release:
+    image: quay.io/openshift-release-dev/ocp-release:4.15.13-multi
+  replicas: 1

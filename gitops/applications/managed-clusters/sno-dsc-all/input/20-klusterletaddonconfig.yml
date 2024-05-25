@@ -1,0 +1,25 @@
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: sno-dsc-all
+  namespace: sno-dsc-all
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
+spec:
+  applicationManager:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  clusterLabels:
+    cloud: Amazon
+    vendor: Openshift
+  clusterName: sno-dsc-all
+  clusterNamespace: sno-dsc-all
+  iamPolicyController:
+    enabled: true
+  policyController:
+    enabled: true
+  proxyConfig: {}
+  searchCollector:
+    enabled: true
