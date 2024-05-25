@@ -12,8 +12,8 @@ spec:
   certPolicyController:
     enabled: true
   clusterLabels:
-    cloud: Amazon
-    vendor: Openshift
+    cloud: auto-detect
+    vendor: auto-detect
   clusterName: sno-dsc-all
   clusterNamespace: sno-dsc-all
   iamPolicyController:
