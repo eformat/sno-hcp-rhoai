@@ -333,5 +333,5 @@ shift `expr $OPTIND - 1`
 
 all
 
-echo -e "\n🌻${GREEN}SNO LLAMA Reconfigured OK.${NC}🌻\n"
+echo -e "\n🌻${GREEN}SNO HCP RHOAI Reconfigured OK.${NC}🌻\n"
 exit 0
