@@ -5,3 +5,10 @@ metadata:
   name: clusters
   annotations:
     argocd.argoproj.io/sync-wave: "-1"
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sno-dsc-all
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
