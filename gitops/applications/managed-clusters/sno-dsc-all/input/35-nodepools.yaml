@@ -19,7 +19,6 @@ spec:
       rootVolume:
         size: 200
         type: gp3
-
       securityGroups:
       - id: sg-0dc6bdbdc334b1fca
       subnet:
@@ -27,4 +26,4 @@ spec:
     type: AWS
   release:
     image: quay.io/openshift-release-dev/ocp-release:4.15.13-multi
-  replicas: 1
+  replicas: 0
