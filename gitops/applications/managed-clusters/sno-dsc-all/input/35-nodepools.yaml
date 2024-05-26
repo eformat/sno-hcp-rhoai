@@ -2,12 +2,9 @@
 apiVersion: hypershift.openshift.io/v1beta1
 kind: NodePool
 metadata:
+  creationTimestamp: null
   name: sno-dsc-all-us-east-2b
   namespace: clusters
-  annotations:
-    argocd.argoproj.io/sync-wave: "35"
-  labels:
-    hypershift.openshift.io/auto-created-for-infra: sno-dsc-all
 spec:
   arch: amd64
   clusterName: sno-dsc-all
@@ -22,6 +19,11 @@ spec:
       rootVolume:
         size: 200
         type: gp3
+
+      securityGroups:
+      - id: sg-0dc6bdbdc334b1fca
+      subnet:
+        id: subnet-048db20a81be7d23f
     type: AWS
   release:
     image: quay.io/openshift-release-dev/ocp-release:4.15.13-multi

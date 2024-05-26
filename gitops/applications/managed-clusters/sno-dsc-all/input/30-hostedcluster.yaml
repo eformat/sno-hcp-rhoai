@@ -1,20 +1,17 @@
----
 apiVersion: hypershift.openshift.io/v1beta1
 kind: HostedCluster
 metadata:
+  creationTimestamp: null
   name: sno-dsc-all
   namespace: clusters
-  labels:
-    hypershift.openshift.io/auto-created-for-infra: sno-dsc-all
-  annotations:
-    argocd.argoproj.io/sync-wave: "30"
-    cluster.open-cluster-management.io/clusterset: 'develop'
 spec:
   autoscaling: {}
   configuration: {}
   controllerAvailabilityPolicy: SingleReplica
   dns:
     baseDomain: sandbox2969.opentlc.com
+    privateZoneID: Z04412898GTZ2F6R5FK4
+    publicZoneID: Z08712411ZJY21NZ92KQR
   etcd:
     managed:
       storage:
@@ -39,9 +36,20 @@ spec:
   platform:
     aws:
       cloudProviderConfig:
+        subnet:
+          id: subnet-048db20a81be7d23f
+        vpc: vpc-017a06bdacad219f5
         zone: us-east-2b
       endpointAccess: Public
       region: us-east-2
+      rolesRef:
+        controlPlaneOperatorARN: arn:aws:iam::339320753047:role/sno-dsc-all-control-plane-operator
+        imageRegistryARN: arn:aws:iam::339320753047:role/sno-dsc-all-openshift-image-registry
+        ingressARN: arn:aws:iam::339320753047:role/sno-dsc-all-openshift-ingress
+        kubeCloudControllerARN: arn:aws:iam::339320753047:role/sno-dsc-all-cloud-controller
+        networkARN: arn:aws:iam::339320753047:role/sno-dsc-all-cloud-network-config-controller
+        nodePoolManagementARN: arn:aws:iam::339320753047:role/sno-dsc-all-node-pool
+        storageARN: arn:aws:iam::339320753047:role/sno-dsc-all-aws-ebs-csi-driver-controller
     type: AWS
   pullSecret:
     name: sno-dsc-all-pull-secret
