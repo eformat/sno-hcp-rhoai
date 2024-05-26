@@ -7,6 +7,8 @@ readonly NC='\033[0m' # No Color
 readonly RUN_DIR=$(pwd)
 
 HOSTED_ZONE=
+SKIP_API=false
+SKIP_INGRESS=false
 
 get_hosted_zone() {
     query='HostedZones[?Name==`'${BASE_DOMAIN}.'`]|[].Id'
@@ -77,6 +79,8 @@ create_aws_secrets() {
 create_issuers() {
     echo "🌴 Running create_issuers..."
 
+    if [ ! -z "${SKIP_API}" ]; then
+
 cat <<EOF | oc apply -f-
 apiVersion: cert-manager.io/v1
 kind: Issuer
@@ -105,6 +109,10 @@ EOF
       exit 1
     fi
 
+    fi
+
+    if [ ! -z "${SKIP_INGRESS}" ]; then
+
 cat <<EOF | oc apply -f-
 apiVersion: cert-manager.io/v1
 kind: Issuer
@@ -131,13 +139,16 @@ EOF
     if [ "$?" != 0 ]; then
       echo -e "🚨${RED}Failed - to run create_issuers ?${NC}"
       exit 1
-    else
-      echo "🌴 create_issuers ran OK"
     fi
+
+    fi
+    echo "🌴 create_issuers ran OK"
 }
 
 create_certificates() {
     echo "🌴 Running create_certificates..."
+
+    if [ ! -z "${SKIP_API}" ]; then
 
 cat <<EOF | oc apply -f-
 apiVersion: cert-manager.io/v1
@@ -161,6 +172,10 @@ EOF
       exit 1
     fi
 
+    fi
+
+    if [ ! -z "${SKIP_INGRESS}" ]; then
+
 cat <<EOF | oc apply -f-
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -182,9 +197,10 @@ EOF
     if [ "$?" != 0 ]; then
       echo -e "🚨${RED}Failed - to run create_certificates ?${NC}"
       exit 1
-    else
-      echo "🌴 create_certificates ran OK"
     fi
+
+    fi
+    echo "🌴 create_certificates ran OK"
 }
 
 wait_for_api_issuer() {
@@ -286,15 +302,27 @@ all() {
     create_caa_route53
 
     create_issuers
-    wait_for_api_issuer
-    wait_for_ingress_issuer
+    if [ ! -z "${SKIP_API}" ]; then
+        wait_for_api_issuer
+    fi
+    if [ ! -z "${SKIP_INGRESS}" ]; then
+        wait_for_ingress_issuer
+    fi
 
     create_certificates
-    wait_for_api_cert
-    wait_for_ingress_cert
+    if [ ! -z "${SKIP_API}" ]; then
+        wait_for_api_cert
+    fi
+    if [ ! -z "${SKIP_INGRESS}" ]; then
+        wait_for_ingress_cert
+    fi
 
-    patch_api_server
-    patch_ingress
+    if [ ! -z "${SKIP_API}" ]; then
+        patch_api_server
+    fi
+    if [ ! -z "${SKIP_INGRESS}" ]; then
+        patch_ingress
+    fi
 }
 
 progress() {
@@ -304,6 +332,49 @@ progress() {
   watch oc get co
 EOF
 }
+
+usage() {
+  cat <<EOF 2>&1
+usage: $0 [ -a -i ]
+
+Deploy Lets Encyrpt Certificates.
+        -a   Skip API Cert
+        -i   Skip Ingress Cert
+
+This script is rerunnable.
+
+Environment Variables:
+    Export these in your environment.
+
+        EMAIL
+        BASE_DOMAIN
+        AWS_ACCESS_KEY_ID
+        AWS_SECRET_ACCESS_KEY
+        AWS_DEFAULT_REGION
+
+Example:
+
+    $0
+
+EOF
+  exit 1
+}
+
+while getopts ai opt; do
+  case $opt in
+    a)
+      export SKIP_API=
+      ;;
+    i)
+      export SKIP_INGRESS=
+      ;;
+    *)
+      usage
+      ;;
+  esac
+done
+
+shift `expr $OPTIND - 1`
 
 # Check for EnvVars
 [ -z "$EMAIL" ] && echo "🕱 Error: must supply EMAIL in env or cli" && exit 1
