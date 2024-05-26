@@ -11,7 +11,7 @@ spec:
         configMapRef: acm-placement
         labelSelector:
           matchLabels:
-            cluster.open-cluster-management.io/placement: placement-sno-dsc-all
+            cluster.open-cluster-management.io/placement: placement-hub-openshift
         requeueAfterSeconds: 180
   syncPolicy:
     preserveResourcesOnDeletion: false
@@ -27,7 +27,7 @@ spec:
         namespace: openshift-gitops
       source:
         repoURL: https://github.com/eformat/sno-hcp-rhoai.git
-        path: gitops/applications/certificates
+        path: gitops/applications/certificates/input/overlay/spokes
         targetRevision: main
         plugin:
           name: argocd-novault-plugin-kustomize

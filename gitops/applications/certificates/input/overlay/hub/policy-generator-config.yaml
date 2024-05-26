@@ -2,9 +2,9 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: PolicyGenerator
 metadata:
-  name: certificates
+  name: certificates-hub
 placementBindingDefaults:
-  name: certificates
+  name: certificates-hub
 policyDefaults:
   placement:
     placementName: placement-hub-openshift
@@ -24,6 +24,6 @@ policyDefaults:
     - NIST SP 800-53
   policyAnnotations: {"argocd.argoproj.io/compare-options": "IgnoreExtraneous"}
 policies:
-  - name: certificates
+  - name: certificates-hub
     manifests:
       - path: input/
