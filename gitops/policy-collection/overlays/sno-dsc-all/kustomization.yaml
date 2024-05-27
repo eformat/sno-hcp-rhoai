@@ -1,4 +1,6 @@
 ---
+namespace: openshift-gitops
+
 resources:
   - ../../base
   - AC-Access-Control

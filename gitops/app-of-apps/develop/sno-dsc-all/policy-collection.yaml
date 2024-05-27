@@ -10,8 +10,8 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: gitops/policy-collection/overlays/sno-dsc-all
     repoURL: https://github.com/eformat/sno-hcp-rhoai.git
+    path: gitops/policy-collection/overlays/sno-dsc-all
     targetRevision: main
     plugin:
       name: argocd-vault-plugin-kustomize
