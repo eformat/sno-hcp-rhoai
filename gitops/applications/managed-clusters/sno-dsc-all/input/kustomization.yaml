@@ -8,5 +8,4 @@ resources:
   - 20-managedcluster.yaml
   - 30-hostedcluster.yaml
   - 35-nodepools.yaml
-  - 40-htpasswd-rbac.yaml
   - 40-htpasswd-secret.yaml
