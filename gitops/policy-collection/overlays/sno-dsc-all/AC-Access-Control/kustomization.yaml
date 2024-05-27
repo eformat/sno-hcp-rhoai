@@ -1,0 +1,5 @@
+---
+namespace: openshift-gitops
+
+resources:
+  - policy-cluster-admin.yaml

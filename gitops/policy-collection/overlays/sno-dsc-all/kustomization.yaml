@@ -1,0 +1,5 @@
+---
+resources:
+  - ../../base
+  - AC-Access-Control
+  - policyset-edev-clusters.yaml
