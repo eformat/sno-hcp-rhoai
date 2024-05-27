@@ -20,9 +20,9 @@ spec:
         size: 200
         type: gp3
       securityGroups:
-      - id: sg-040d0692a799c9bed
+      - id: sg-042e3c4800e174b0d
       subnet:
-        id: subnet-0cd823434108fb35f
+        id: subnet-0e5e16a0a0273562b
     type: AWS
   release:
     image: quay.io/openshift-release-dev/ocp-release:4.15.13-multi
