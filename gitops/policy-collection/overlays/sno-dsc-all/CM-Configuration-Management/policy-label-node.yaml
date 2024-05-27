@@ -29,6 +29,14 @@ spec:
                   namespace: default
                 rules:
                   - apiGroups:
+                      - security.openshift.io
+                    resourceNames:
+                      - privileged
+                    resources:
+                      - securitycontextconstraints
+                    verbs:
+                      - use
+                  - apiGroups:
                       - ""
                     resources:
                       - nodes
@@ -107,3 +115,22 @@ spec:
                               valueFrom:
                                 fieldRef:
                                   fieldPath: spec.nodeName
+                          volumeMounts:
+                            - mountPath: /host
+                              name: host
+                          securityContext:
+                            allowPrivilegeEscalation: true
+                            runAsUser: 0
+                            runAsGroup: 0
+                            privileged: true
+                            capabilities:
+                              add:
+                                - SYS_CHROOT
+                          tty: true
+                      securityContext:
+                        fsGroup: 0
+                      volumes:
+                        - hostPath:
+                            path: /
+                            type: Directory
+                          name: host
