@@ -2,6 +2,6 @@
 namespace: openshift-gitops
 
 resources:
-   - ../../base
+  # - ../../base
   - AC-Access-Control
   - policyset-clusters.yaml
