@@ -107,6 +107,9 @@ spec:
                             - -c
                             - |
                               export TOKEN="$(cat /run/secrets/kubernetes.io/serviceaccount/token)"
+                              set -xe
+                              chroot /host <<EOT
+                              cd /tmp
                               oc label node --selector=nvidia.com/gpu.product=NVIDIA-L4 nvidia.com/device-plugin.config=nvidia-l4 --token \$TOKEN --server https://172.31.0.1:443 --insecure-skip-tls-verify --overwrite
                               oc label node \$NODE_NAME nfs-selinux/node-configured=$(date +%s) --token \$TOKEN --server https://172.31.0.1:443 --insecure-skip-tls-verify --overwrite
                               EOT
