@@ -4,9 +4,18 @@ metadata:
   creationTimestamp: null
   name: sno-dsc-all
   namespace: clusters
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
 spec:
   autoscaling: {}
-  configuration: {}
+  configuration:
+    oauth:
+      identityProviders:
+      - name: htpasswd_provider
+        type: HTPasswd
+        htpasswd:
+          fileData:
+            name: htpasswdidp-secret
   controllerAvailabilityPolicy: SingleReplica
   dns:
     baseDomain: sandbox2969.opentlc.com

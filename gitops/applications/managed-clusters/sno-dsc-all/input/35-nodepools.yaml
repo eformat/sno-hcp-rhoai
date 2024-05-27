@@ -5,6 +5,8 @@ metadata:
   creationTimestamp: null
   name: sno-dsc-all-us-east-2b
   namespace: clusters
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
 spec:
   arch: amd64
   clusterName: sno-dsc-all

@@ -84,7 +84,7 @@ all() {
 
     create_htpasswd
     add_cluster_admins
-    configure_oauth
+    #configure_oauth
 }
 
 # Check for EnvVars
