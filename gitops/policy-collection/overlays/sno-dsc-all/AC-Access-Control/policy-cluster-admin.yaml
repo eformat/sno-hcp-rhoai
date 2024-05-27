@@ -8,7 +8,7 @@ metadata:
     policy.open-cluster-management.io/standards: NIST SP 800-53
   labels:
     requires-rolling-restart: none
-  name: policy-cluster-admin
+  name: cluster-admin-sno-dsc-all
 spec:
   disabled: false
   policy-templates:
@@ -16,7 +16,7 @@ spec:
         apiVersion: policy.open-cluster-management.io/v1
         kind: ConfigurationPolicy
         metadata:
-          name: cluster-admin
+          name: cluster-admin-sno-dsc-all
         spec:
           object-templates:
             - complianceType: musthave
