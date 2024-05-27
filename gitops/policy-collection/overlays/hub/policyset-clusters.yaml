@@ -6,7 +6,7 @@ metadata:
 spec:
   description: "Policies for cluster configuration"
   policies:
-    - acm-clean-hub
+    - acm-clean
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
