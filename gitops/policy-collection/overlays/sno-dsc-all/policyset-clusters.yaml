@@ -3,7 +3,6 @@ apiVersion: policy.open-cluster-management.io/v1beta1
 kind: PolicySet
 metadata:
   name: sno-dsc-all-cluster
-  namespace: openshift-gitops
 spec:
   description: "Policies for cluster configuration"
   policies:
@@ -13,7 +12,6 @@ apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
 metadata:
   name: binding-sno-dsc-all-cluster
-  namespace: openshift-gitops
 placementRef:
   apiGroup: cluster.open-cluster-management.io
   kind: Placement
