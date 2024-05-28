@@ -206,22 +206,6 @@ app_of_apps() {
     echo "🌴 app_of_apps ran OK"
 }
 
-wait_for_gpu_cluster_policy() {
-    local i=0
-    STATUS=$(oc get clusterpolicies.nvidia.com gpu-cluster-policy -n openshift-operators -o jsonpath='{.status.state}')
-    until [ "$STATUS" == "ready" ]
-    do
-        echo -e "${GREEN}Waiting for clusterpolicies.nvidia.com to install.${NC}"
-        sleep 5
-        ((i=i+1))
-        if [ $i -gt 200 ]; then
-            echo -e "🚨${RED}Failed waiting for clusterpolicies.nvidia.com never Succeeded?.${NC}"
-            exit 1
-        fi
-        STATUS=$(oc get clusterpolicies.nvidia.com gpu-cluster-policy -n openshift-operators -o jsonpath='{.status.state}')
-    done
-}
-
 label_managed_cluster() {
     if [ -z "$DRYRUN" ]; then
         echo -e "${GREEN}Ignoring - label_managed_cluster - dry run set${NC}"
