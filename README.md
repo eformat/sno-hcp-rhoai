@@ -9,7 +9,7 @@ The model is scalable to full size clusters of course. This is proving out the c
 
 Hub cluster is deployed using [sno on spot](https://github.com/eformat/sno-for-100).
 
-Currently HCP on AWS is tech.preview - so the creation of HCP AWS  pieces must be done as two step process.
+Currently [HCP on AWS is tech.preview](https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.10/html-single/clusters/index#hosting-service-cluster-configure-aws) - so the creation of HCP AWS  pieces must be done as two step process.
 
 Export the environment:
 
