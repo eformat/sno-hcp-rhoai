@@ -6,5 +6,5 @@ helmCharts:
   - name: console-plugin-nvidia-gpu
     namespace: nvidia-gpu-operator
     version: 0.2.3
-    releaseName: sno-dsc-all
-    repo: https://rh-ecosystem-edge.github.io/console-plugin-nvidia-gpu
+    releaseName: console-plugin-nvidia-gpu
+    repo:  # https://rh-ecosystem-edge.github.io/console-plugin-nvidia-gpu
