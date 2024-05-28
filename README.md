@@ -65,3 +65,11 @@ vault kv put kv/$PROJECT_NAME/$APP_NAME \
   ETCD_DECRYPTION_KEY="${ETCD_DECRYPTION_KEY}" \
   HTPASSWORD="${HTPASSWORD}"
 ```
+
+Deleting an HCP Cluster still needs this manual step:
+
+```bash
+hcp destroy cluster aws \
+    --name ${CLUSTER_NAME} \
+    --aws-creds ${AWS_CREDS}
+```
