@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: gpu-dashboard
+  name: gpu-dashboard-sno-dsc-all
   namespace: openshift-gitops
 spec:
   destination:
