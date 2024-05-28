@@ -27,7 +27,7 @@ spec:
         namespace: openshift-gitops
       source:
         repoURL: https://github.com/eformat/sno-hcp-rhoai.git
-        path: gitops/applications/gpu/overlays/sno-dsc-all
+        path: applications/gpu/overlays/sno-dsc-all
         targetRevision: main
         plugin:
           name: argocd-novault-plugin-kustomize

@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: sno-dsc-all
+  name: vault
   namespace: openshift-gitops
 spec:
   goTemplate: true
@@ -14,24 +14,26 @@ spec:
             cluster.open-cluster-management.io/placement: placement-hub-openshift
         requeueAfterSeconds: 180
   syncPolicy:
-    preserveResourcesOnDeletion: true
+    preserveResourcesOnDeletion: false
   template:
     metadata:
-      name: sno-dsc-all-{{.name}}
+      name: vault-{{.name}}
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
     spec:
       project: default
       destination:
         server: "{{.server}}"
-        namespace: openshift-gitops
+        namespace: vault
       source:
         repoURL: https://github.com/eformat/sno-hcp-rhoai.git
-        path: gitops/applications/managed-clusters/sno-dsc-all
-        targetRevision: main
+        path: applications/vault
         plugin:
-          name: argocd-vault-plugin-kustomize
+          name: argocd-novault-plugin-kustomize
+        targetRevision: main
       syncPolicy:
         automated:
-          prune: false
+          prune: true
           selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

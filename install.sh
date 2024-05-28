@@ -70,10 +70,10 @@ boostrap() {
 
     echo "🌴 Running bootstrap ..."
 
-    oc apply -k gitops/bootstrap
+    oc apply -k bootstrap
     wait_for_gitops_csv
     wait_for_acm_csv
-    oc apply -k gitops/bootstrap
+    oc apply -k bootstrap
 
     if [ "$?" != 0 ]; then
       echo -e "🚨${RED}Failed - to run boostrap ?${NC}"
@@ -199,7 +199,7 @@ app_of_apps() {
 
     echo "🌴 Running app_of_apps..."
 
-    oc apply -f gitops/app-of-apps/develop-hub-app-of-apps.yaml
+    oc apply -f app-of-apps/develop-hub-app-of-apps.yaml
 
     wait_for_machine_config
 

@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: develop-app-of-apps
+  name: sno-dsc-all-app-of-apps
   namespace: openshift-gitops
 spec:
   destination:
@@ -10,7 +10,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   project: default
   source:
-    path: gitops/app-of-apps/develop/hub
+    path: app-of-apps/develop/sno-dsc-all
     directory:
       include: "*.yaml"
     repoURL: https://github.com/eformat/sno-hcp-rhoai.git

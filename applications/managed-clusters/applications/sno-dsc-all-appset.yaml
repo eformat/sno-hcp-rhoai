@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: perf-enhancements
+  name: sno-dsc-all
   namespace: openshift-gitops
 spec:
   goTemplate: true
@@ -14,10 +14,10 @@ spec:
             cluster.open-cluster-management.io/placement: placement-hub-openshift
         requeueAfterSeconds: 180
   syncPolicy:
-    preserveResourcesOnDeletion: false
+    preserveResourcesOnDeletion: true
   template:
     metadata:
-      name: perf-enhancements-{{.name}}
+      name: sno-dsc-all-{{.name}}
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
     spec:
@@ -27,11 +27,11 @@ spec:
         namespace: openshift-gitops
       source:
         repoURL: https://github.com/eformat/sno-hcp-rhoai.git
-        path: gitops/applications/perf-enhancements
+        path: applications/managed-clusters/sno-dsc-all
         targetRevision: main
         plugin:
-          name: argocd-novault-plugin-kustomize
+          name: argocd-vault-plugin-kustomize
       syncPolicy:
         automated:
-          prune: true
+          prune: false
           selfHeal: true

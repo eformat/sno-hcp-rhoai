@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: certificates-sno-dsc-all
+  name: assisted-service
   namespace: openshift-gitops
 spec:
   goTemplate: true
@@ -17,7 +17,7 @@ spec:
     preserveResourcesOnDeletion: false
   template:
     metadata:
-      name: certificates-sno-dsc-all-{{.name}}
+      name: assisted-service-{{.name}}
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
     spec:
@@ -27,10 +27,10 @@ spec:
         namespace: openshift-gitops
       source:
         repoURL: https://github.com/eformat/sno-hcp-rhoai.git
-        path: gitops/applications/certificates/overlay/spokes
-        targetRevision: main
+        path: applications/assisted-service
         plugin:
           name: argocd-novault-plugin-kustomize
+        targetRevision: main
       syncPolicy:
         automated:
           prune: true

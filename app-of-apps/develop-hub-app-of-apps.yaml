@@ -2,19 +2,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: policy-collection-hub
+  name: develop-app-of-apps
   namespace: openshift-gitops
 spec:
   destination:
     namespace: openshift-gitops
-    server: https://kubernetes.default.svc
+    server: 'https://kubernetes.default.svc'
   project: default
   source:
+    path: app-of-apps/develop/hub
+    directory:
+      include: "*.yaml"
     repoURL: https://github.com/eformat/sno-hcp-rhoai.git
-    path: gitops/policy-collection/overlays/hub
     targetRevision: main
-    plugin:
-      name: argocd-vault-plugin-kustomize
   syncPolicy:
     automated:
       prune: true

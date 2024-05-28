@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: assisted-service
+  name: perf-enhancements
   namespace: openshift-gitops
 spec:
   goTemplate: true
@@ -17,7 +17,7 @@ spec:
     preserveResourcesOnDeletion: false
   template:
     metadata:
-      name: assisted-service-{{.name}}
+      name: perf-enhancements-{{.name}}
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
     spec:
@@ -27,10 +27,10 @@ spec:
         namespace: openshift-gitops
       source:
         repoURL: https://github.com/eformat/sno-hcp-rhoai.git
-        path: gitops/applications/assisted-service
+        path: applications/perf-enhancements
+        targetRevision: main
         plugin:
           name: argocd-novault-plugin-kustomize
-        targetRevision: main
       syncPolicy:
         automated:
           prune: true
