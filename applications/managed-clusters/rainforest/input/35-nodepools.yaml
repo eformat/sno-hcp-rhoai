@@ -1,0 +1,31 @@
+---
+apiVersion: hypershift.openshift.io/v1beta1
+kind: NodePool
+metadata:
+  creationTimestamp: null
+  name: rainforest-us-east-2b
+  namespace: clusters
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
+spec:
+  arch: amd64
+  clusterName: rainforest
+  management:
+    autoRepair: false
+    upgradeType: Replace
+  nodeDrainTimeout: 0s
+  platform:
+    aws:
+      instanceProfile: rainforest-worker
+      instanceType: g6.4xlarge
+      rootVolume:
+        size: 200
+        type: gp3
+      securityGroups:
+      - id: sg-04d0efa26ddf844dc
+      subnet:
+        id: subnet-0be6d5f2108387587
+    type: AWS
+  release:
+    image: quay.io/openshift-release-dev/ocp-release:4.15.14-multi
+  replicas: 1

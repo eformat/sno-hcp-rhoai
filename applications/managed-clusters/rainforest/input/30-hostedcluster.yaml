@@ -1,0 +1,89 @@
+apiVersion: hypershift.openshift.io/v1beta1
+kind: HostedCluster
+metadata:
+  creationTimestamp: null
+  name: rainforest
+  namespace: clusters
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
+spec:
+  autoscaling: {}
+  configuration:
+    oauth:
+      identityProviders:
+      - name: htpasswd_provider
+        type: HTPasswd
+        htpasswd:
+          fileData:
+            name: htpasswdidp-secret
+  controllerAvailabilityPolicy: SingleReplica
+  dns:
+    baseDomain: sandbox2969.opentlc.com
+    privateZoneID: Z053969619X2KZTZCP7ZM
+    publicZoneID: Z08712411ZJY21NZ92KQR
+  etcd:
+    managed:
+      storage:
+        persistentVolume:
+          size: 8Gi
+          storageClassName: gp3-csi
+        type: PersistentVolume
+    managementType: Managed
+  fips: false
+  infraID: rainforest
+  infrastructureAvailabilityPolicy: SingleReplica
+  issuerURL: https://hcp-clusters.s3.us-east-2.amazonaws.com/rainforest
+  networking:
+    clusterNetwork:
+    - cidr: 10.132.0.0/14
+    machineNetwork:
+    - cidr: 10.0.0.0/16
+    networkType: OVNKubernetes
+    serviceNetwork:
+    - cidr: 172.31.0.0/16
+  olmCatalogPlacement: management
+  platform:
+    aws:
+      cloudProviderConfig:
+        subnet:
+          id: subnet-0be6d5f2108387587
+        vpc: vpc-06f9a83024b433daf
+        zone: us-east-2c
+      endpointAccess: Public
+      region: us-east-2
+      rolesRef:
+        controlPlaneOperatorARN: arn:aws:iam::339320753047:role/rainforest-control-plane-operator
+        imageRegistryARN: arn:aws:iam::339320753047:role/rainforest-openshift-image-registry
+        ingressARN: arn:aws:iam::339320753047:role/rainforest-openshift-ingress
+        kubeCloudControllerARN: arn:aws:iam::339320753047:role/rainforest-cloud-controller
+        networkARN: arn:aws:iam::339320753047:role/rainforest-cloud-network-config-controller
+        nodePoolManagementARN: arn:aws:iam::339320753047:role/rainforest-node-pool
+        storageARN: arn:aws:iam::339320753047:role/rainforest-aws-ebs-csi-driver-controller
+    type: AWS
+  pullSecret:
+    name: rainforest-pull-secret
+  release:
+    image: quay.io/openshift-release-dev/ocp-release:4.15.14-multi
+  secretEncryption:
+    aescbc:
+      activeKey:
+        name: rainforest-etcd-encryption-key
+    type: aescbc
+  services:
+  - service: APIServer
+    servicePublishingStrategy:
+      type: LoadBalancer
+  - service: OAuthServer
+    servicePublishingStrategy:
+      type: Route
+  - service: Konnectivity
+    servicePublishingStrategy:
+      type: Route
+  - service: Ignition
+    servicePublishingStrategy:
+      type: Route
+  - service: OVNSbDb
+    servicePublishingStrategy:
+      type: Route
+  sshKey:
+    name: rainforest-ssh-key

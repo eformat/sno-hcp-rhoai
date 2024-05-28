@@ -1,0 +1,25 @@
+---
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: rainforest
+  namespace: rainforest
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
+spec:
+  applicationManager:
+    enabled: true
+  certPolicyController:
+    enabled: true
+  clusterLabels:
+    cloud: auto-detect
+    vendor: auto-detect
+  clusterName: rainforest
+  clusterNamespace: rainforest
+  iamPolicyController:
+    enabled: true
+  policyController:
+    enabled: true
+  proxyConfig: {}
+  searchCollector:
+    enabled: true

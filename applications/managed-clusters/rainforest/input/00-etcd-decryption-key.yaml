@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+data:
+  key: <ETCD_DECRYPTION_KEY>
+kind: Secret
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+    hypershift.openshift.io/cluster: clusters/rainforest
+  creationTimestamp: null
+  labels:
+    hypershift.openshift.io/auto-created-for-infra: rainforest
+    hypershift.openshift.io/safe-to-delete-with-cluster: "true"
+  name: rainforest-etcd-encryption-key
+  namespace: clusters
+type: Opaque

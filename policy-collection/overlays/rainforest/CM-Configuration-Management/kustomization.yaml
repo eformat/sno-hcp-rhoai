@@ -1,0 +1,4 @@
+---
+resources:
+  - policy-label-node.yaml
+  - policy-console-plugins.yaml

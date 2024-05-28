@@ -89,6 +89,23 @@ spec:
             - {key: vendor, operator: In, values: ["OpenShift"]}
             - {key: name, operator: In, values: ["sno-dsc-all"]}
 ---
+apiVersion: cluster.open-cluster-management.io/v1beta1
+kind: Placement
+metadata:
+  labels:
+    custom: gitops-operator-policy
+  name: placement-rainforest
+  namespace: openshift-gitops
+spec:
+  clusterSets:
+    - develop
+  predicates:
+    - requiredClusterSelector:
+        labelSelector:
+          matchExpressions:
+            - {key: vendor, operator: In, values: ["OpenShift"]}
+            - {key: name, operator: In, values: ["rainforest"]}
+---
 apiVersion: user.openshift.io/v1
 kind: Group
 metadata:
