@@ -3,7 +3,7 @@
 Single Node OpenShift / Hosted Control Planes / RHOAI on AWS.
 
 - sno hub (m6i.8xlarge)
-- sno gpu workload hcp cluster (g6.4xlarge)
+- sno gpu workload hcp cluster(s) (g6.4xlarge)
 
 The model is scalable to full size clusters of course. This is proving out the configuration for self-hosting workload RHOAI clusters using HCP in AWS.
 
