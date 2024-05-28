@@ -222,27 +222,6 @@ wait_for_gpu_cluster_policy() {
     done
 }
 
-gpu_config() {
-    if [ -z "$DRYRUN" ]; then
-        echo -e "${GREEN}Ignoring - gpu_config - dry run set${NC}"
-        return
-    fi
-
-    wait_for_gpu_cluster_policy
-
-    oc label node \
-        --selector=nvidia.com/gpu.product=NVIDIA-L4 \
-        nvidia.com/device-plugin.config=nvidia-l4 \
-        --overwrite
-
-    if [ "$?" != 0 ]; then
-      echo -e "🚨${RED}Failed - to run gpu_config ?${NC}"
-      exit 1
-    else
-      echo "🌴 gpu_config ran OK"
-    fi
-}
-
 label_managed_cluster() {
     if [ -z "$DRYRUN" ]; then
         echo -e "${GREEN}Ignoring - label_managed_cluster - dry run set${NC}"
@@ -297,7 +276,6 @@ all() {
     app_of_apps
     storage_class
     label_managed_cluster
-    #gpu_config
 }
 
 while getopts db:c:k: opts; do
