@@ -8,6 +8,7 @@ spec:
   policies:
     - cluster-admin-sno-dsc-all
     - label-node-sno-dsc-all
+    - console-plugins-sno-dsc-all
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
