@@ -2,9 +2,9 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: PolicyGenerator
 metadata:
-  name: certificates-spokes
+  name: certificates-rainforest
 placementBindingDefaults:
-  name: certificates-spokes
+  name: certificates-rainforest
 policyDefaults:
   placement:
     placementName: placement-spokes-openshift
@@ -24,6 +24,6 @@ policyDefaults:
     - NIST SP 800-53
   policyAnnotations: {"argocd.argoproj.io/compare-options": "IgnoreExtraneous"}
 policies:
-  - name: certificates-spokes
+  - name: certificates-rainforest
     manifests:
       - path: input/
