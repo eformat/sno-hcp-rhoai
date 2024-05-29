@@ -16,6 +16,24 @@ spec:
         htpasswd:
           fileData:
             name: htpasswdidp-secret
+      - ldap:
+          attributes:
+            email:
+            - mail
+            id:
+            - dn
+            name:
+            - displayName
+            preferredUsername:
+            - uid
+          bindDN: uid=ldap_admin,cn=users,cn=accounts,dc=redhatlabs,dc=dev
+          bindPassword:
+            name: ipa-bind-password
+          insecure: true
+          url: ldap://ipa.ipa.svc.cluster.local:389/dc=redhatlabs,dc=dev?uid?sub?(memberOf=cn=student,cn=groups,cn=accounts,dc=redhatlabs,dc=dev)
+        mappingMethod: claim
+        name: FreeIPA
+        type: LDAP
   controllerAvailabilityPolicy: SingleReplica
   dns:
     baseDomain: sandbox2969.opentlc.com
