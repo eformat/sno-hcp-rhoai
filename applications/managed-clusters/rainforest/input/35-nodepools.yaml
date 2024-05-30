@@ -3,7 +3,7 @@ apiVersion: hypershift.openshift.io/v1beta1
 kind: NodePool
 metadata:
   creationTimestamp: null
-  name: rainforest-us-east-2b
+  name: rainforest-us-east-2c
   namespace: clusters
   annotations:
     argocd.argoproj.io/sync-wave: "30"
@@ -22,9 +22,9 @@ spec:
         size: 200
         type: gp3
       securityGroups:
-      - id: sg-04d0efa26ddf844dc
+      - id: sg-0ca0eb006fa005975
       subnet:
-        id: subnet-0be6d5f2108387587
+        id: subnet-0a072f1308a796f97
     type: AWS
   release:
     image: quay.io/openshift-release-dev/ocp-release:4.15.14-multi
