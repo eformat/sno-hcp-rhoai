@@ -10,6 +10,8 @@ metadata:
 spec:
   arch: amd64
   clusterName: rainforest
+  config:
+  - name: rainforest-machineconfig
   management:
     autoRepair: false
     upgradeType: Replace
