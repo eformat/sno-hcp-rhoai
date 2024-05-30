@@ -17,7 +17,7 @@ spec:
   platform:
     aws:
       instanceProfile: rainforest-worker
-      instanceType: g6.4xlarge
+      instanceType: g6.8xlarge
       rootVolume:
         size: 200
         type: gp3
