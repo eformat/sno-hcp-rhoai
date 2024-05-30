@@ -28,4 +28,4 @@ spec:
     type: AWS
   release:
     image: quay.io/openshift-release-dev/ocp-release:4.15.14-multi
-  replicas: 1
+  replicas: 0
