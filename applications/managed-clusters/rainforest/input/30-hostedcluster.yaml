@@ -37,7 +37,7 @@ spec:
   controllerAvailabilityPolicy: SingleReplica
   dns:
     baseDomain: sandbox2969.opentlc.com
-    privateZoneID: Z0175807189AIKBG1UNTR
+    privateZoneID: Z08663782TKEVY2LGHXYJ
     publicZoneID: Z08712411ZJY21NZ92KQR
   etcd:
     managed:
@@ -64,8 +64,8 @@ spec:
     aws:
       cloudProviderConfig:
         subnet:
-          id: subnet-0a072f1308a796f97
-        vpc: vpc-0a4bf0fbe26d5cbd6
+          id: subnet-0ed7d2d8ed4b69dad
+        vpc: vpc-07b302f1b16405369
         zone: us-east-2c
       endpointAccess: Public
       region: us-east-2
