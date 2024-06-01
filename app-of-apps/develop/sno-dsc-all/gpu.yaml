@@ -33,5 +33,5 @@ spec:
           name: argocd-novault-plugin-kustomize
       syncPolicy:
         automated:
-          prune: true
+          prune: false
           selfHeal: true
