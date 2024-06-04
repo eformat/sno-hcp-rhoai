@@ -10,7 +10,7 @@ DRYRUN=${DRYRUN:-}
 BASE_DOMAIN=${BASE_DOMAIN:-}
 CLUSTER_NAME=${CLUSTER_NAME:-}
 EXTRA_DISK_SIZE=${EXTRA_DISK_SIZE:-200}
-GITOPS_OPERATOR_VERSION=1.12.2
+GITOPS_OPERATOR_VERSION=1.12.3
 ACM_OPERATOR_VERSION=2.10.3
 
 wait_for_acm_csv() {
@@ -201,7 +201,7 @@ app_of_apps() {
 
     oc apply -f app-of-apps/develop-hub-app-of-apps.yaml
 
-    wait_for_machine_config
+    #wait_for_machine_config
 
     echo "🌴 app_of_apps ran OK"
 }
