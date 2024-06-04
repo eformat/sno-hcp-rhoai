@@ -256,9 +256,9 @@ all() {
 
     wait_for_openshift_api
     boostrap
-    setup_extra_storage
+    #setup_extra_storage
     app_of_apps
-    storage_class
+    #storage_class
     label_managed_cluster
 }
 
