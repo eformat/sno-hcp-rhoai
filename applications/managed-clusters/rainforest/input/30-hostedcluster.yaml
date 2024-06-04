@@ -64,8 +64,8 @@ spec:
     aws:
       cloudProviderConfig:
         subnet:
-          id: subnet-0ed7d2d8ed4b69dad
-        vpc: vpc-07b302f1b16405369
+          id: subnet-0d2735eae6780691c
+        vpc: vpc-01f82ce99bbbe337b
         zone: us-east-2c
       endpointAccess: Public
       region: us-east-2
@@ -81,7 +81,7 @@ spec:
   pullSecret:
     name: rainforest-pull-secret
   release:
-    image: quay.io/openshift-release-dev/ocp-release:4.15.14-multi
+    image: quay.io/openshift-release-dev/ocp-release:4.15.15-multi
   secretEncryption:
     aescbc:
       activeKey:
