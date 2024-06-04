@@ -1,4 +1,9 @@
 ---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: clusters
+---
 apiVersion: operator.open-cluster-management.io/v1
 kind: MultiClusterHub
 metadata:
