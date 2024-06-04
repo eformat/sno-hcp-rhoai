@@ -14,6 +14,8 @@ create_htpasswd() {
         [ $x == 1 ] && htpasswd -bBc /tmp/htpasswd admin ${ADMIN_PASSWORD}
         [ $x -gt 1 ] && htpasswd -bB /tmp/htpasswd admin$x ${ADMIN_PASSWORD}
     done
+    oc delete secret htpasswdidp-secret -n openshift-config
+    oc create secret generic htpasswdidp-secret -n openshift-config --from-file=/tmp/htpasswd
     if [ "$?" != 0 ]; then
       echo -e "🚨${RED}Failed - to run create_htpasswd ?${NC}"
       exit 1
@@ -38,8 +40,6 @@ add_cluster_admins() {
 
 configure_oauth() {
     echo "🌴 Running configure_oauth..."
-    oc delete secret htpasswdidp-secret -n openshift-config
-    oc create secret generic htpasswdidp-secret -n openshift-config --from-file=/tmp/htpasswd
 
     if [ "$?" != 0 ]; then
       echo -e "🚨${RED}Failed - to create secret, configure_oauth ?${NC}"
