@@ -9,3 +9,4 @@ resources:
   - 30-hostedcluster.yaml
   - 35-nodepools.yaml
   - 40-htpasswd-secret.yaml
+  - 50-configmap.yaml
