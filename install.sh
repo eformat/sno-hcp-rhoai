@@ -101,7 +101,7 @@ setup_extra_storage() {
     if [[ $(aws ec2 describe-volumes --region=${AWS_DEFAULT_REGION} \
               --filters=Name=attachment.instance-id,Values=${INSTANCE_ID} \
               --query "Volumes[*].{VolumeID:Attachments[0].VolumeId,InstanceID:Attachments[0].InstanceId,State:Attachments[0].State,Environment:Tags[?Key=='Environment']|[0].Value}" \
-              | jq length) > 1 ]]; then 
+              | jq length) > 1 ]]; then
          echo -e "💀${ORANGE} More than 1 volume attachment found, assuming this step been done previously, returning? ${NC}";
          return
     fi

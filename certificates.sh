@@ -161,7 +161,7 @@ spec:
   commonName: "${LE_API}"
   secretName: tls-api
   dnsNames:
-  - "${LE_API}" 
+  - "${LE_API}"
   issuerRef:
     name: letsencrypt-api
     kind: Issuer
