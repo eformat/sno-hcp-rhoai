@@ -10,7 +10,7 @@ policyDefaults:
     placementName: placement-hub-openshift
   categories:
     - CM Configuration Management
-  complianceType: "mustonlyhave"
+  complianceType: "musthave"
   controls:
     - CM-2 Baseline Configuration
   consolidateManifests: false
