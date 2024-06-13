@@ -8,6 +8,7 @@ spec:
   policies:
     - acm-clean
     - cluster-spoke-ipa-secret
+    - service-account-mustonlyhave
 ---
 apiVersion: policy.open-cluster-management.io/v1
 kind: PlacementBinding
